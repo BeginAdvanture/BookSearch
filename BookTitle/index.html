@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width= device-width, initial-scale=1">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="animation.css">
+    <link rel="stylesheet" href="result.css">
+
+    <meta property="og:url" content="https://weather-cody123.netlify.app" />
+    <meta property="og:title" content="책검색" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="img/share.png" />
+    <meta property="og:description" content="책검색" />
+
+    <meta rel="shortcut icon" href="img/favicon.ico" />
+    <meta rel="apple-touch-icon-precomposed" href="img/favicon.ico" />
+    <style>
+        body {
+            background-color: rgb(62, 149, 212);
+            font-family: 'Do Hyeon', sans-serif;
+            font-size: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+    
+    <section id="main" class="mx-auto my-5 py-5 px-3">
+
+        <h2>책 검색 어플</h2>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text"></span>
+            <div class="form-floating">
+                <input type="text" id="book" class="form-control" id="floatingInputGroup1" placeholder="Username"
+                    value="">
+                <label for="floatingInputGroup1">제목 검색</label>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-8 col-sm-10 col-12 mx-auto" > 
+            <img src="book1.png" alt="mainImage" class="img-fluid">
+        </div>
+        <button onclick="begin()" class="btn btn-outline-dark my-5">제목 검색</button>
+        
+    </section>
+
+    <section id="result" class="mx-auto my-5 py-5 px-3">
+
+        <p1 >제목 : </p1><br>
+        <p2> </p2><br>  
+        <p3>저자 : </p3>&nbsp;&nbsp;
+        <p4>역자 : </p4>&nbsp;&nbsp;<br>
+        <p5>출판사 : </p5><br>
+        <p6>판매가 : </p6>&nbsp;&nbsp;
+        <p7>할인가 : </p7><br>
+        <p8>상태: </p8><br>
+        <p9 ></p9><br><br>
+        
+
+
+
+
+
+
+
+
+
+        <div id="resultImg" class="my-3 col-lg-6 col-md-8 col-sm-10 col-12 mx-auto">
+            <img src="image/image-01.png" class="my-3 col-lg-6 col-md-8 col-sm-10 col-12 mx-auto" alt="">
+        </div>
+
+        <div id="resultDesc"></div>
+
+
+        <button type="button" class="kakao mt-3 py-2 px-2">공유하기</button>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.js"
+        integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous">
+        </script>
+
+
+    <script>
+        function booktitle() {
+            //let book = document.getElementById("book").value;
+            
+            
+                $.ajax({
+                    method: "GET",
+                    url: "https://dapi.kakao.com/v3/search/book?target=title",
+                    data: { query: $("#book").val() },
+                    headers: { Authorization: "KakaoAK cfb596d7763cbe73f413c2459436b9d8" }
+                })
+                    .done(function (msg) {
+
+                        $("p1").append("<strong>" + msg.documents[0].title + "</strong>");
+                        $("p2").append("<img src =' " + msg.documents[0].thumbnail + "'/>");
+                        $("p3").append("<strong>" + msg.documents[0].authors + "</strong>");
+                        $("p4").append("<strong>" + msg.documents[0].translators + "</strong>");
+                        $("p5").append("<strong>" + msg.documents[0].publisher + "</strong>");
+                        $("p6").append("<strong>" + msg.documents[0].price + "</strong>");
+                        $("p7").append("<strong>" + msg.documents[0].sale_price + "</strong>");
+                        $("p8").append("<strong>" + msg.documents[0].status + "</strong>");
+                        $("p9").append("<a href='" + msg.documents[0].url + " '>더 많은 정보</a>");
+                        
+                    });
+
+
+                    
+
+                }
+        function begin() {
+            main.style.WebkitAnimation = "fadeOut 1s";
+            main.style.animation = "fadeOut 1s";
+            //let city = document.getElementById("city").value;
+            setTimeout(() => {
+
+                result.style.WebkitAnimation = "fadeIn 1s";
+                result.style.animation = "fadeIn 1s";
+
+                setTimeout(() => {
+
+                    main.style.display = "none";
+                    result.style.display = "block";
+                }, 450)
+
+                booktitle()
+
+            }, 450);
+        }
+
+    </script>
+</body>
+
+</html>

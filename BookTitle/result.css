@@ -1,0 +1,40 @@
+#result{
+    display: none;
+    background-color: whitesmoke;
+    width: 80%;
+    text-align: center;
+    border-radius: 20px;
+    font-size:15px;
+}
+.resultDesc{
+    font-size: 20px;
+}
+
+.resultname{
+    font-size: 20px;
+}
+p{
+    display: inline-block;
+}
+.kakao{
+    color: rgb(84, 79, 79);
+    background-color: #FEE500;
+    font-size: 20px;
+    border: 0px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+.kakao:hover, .kakao:focus{
+    background-color: whitesmoke;
+    color: #FEE500;
+}
+p5{
+    
+    
+}
+p7{
+    color: rgb(216, 19, 19);
+}
+p8{
+    color: rgb(51, 54, 235);
+}
